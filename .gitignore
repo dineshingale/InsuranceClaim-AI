@@ -1,0 +1,17 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+.env
+.idea
+.vscode
+coverage
+test-results
+__pycache__
+*.pyc
+venv
+.venv
+env
+.env
+.pytest_cache
