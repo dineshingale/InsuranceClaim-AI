@@ -1,96 +1,48 @@
-# Intelligent Insurance Claim Processing & Fraud Guard
+# Smart Claims Processor (Full Stack)
 
-This application constitutes the **Smart Claims Processor**, a multi-modal AI system designed to streamline insurance claim processing. It combines **NLP (Natural Language Processing)** for text analysis with **Anomaly Detection** for numerical fraud detection.
-
-## 🚀 Features
-
-*   **Multi-Modal Analysis**: Fuses text (claim description) and structured data (amount, tenure).
-*   **Stream A (NLP)**: Classifies claims into categories (Medical, Accident, Theft, etc.) and detects urgency.
-*   **Stream B (Fraud Guard)**: Uses Isolation Forest to detect statistical anomalies in claim amounts relative to customer history.
-*   **Fusion Layer**: Intelligent logic to make a final recommendation: Auto-Approve, Manual Review, or Investigation.
-*   **Synthetic Data Generation**: Self-contained module to generate realistic dummy data for testing.
-
-## 🛠️ Tech Stack
-
-*   **Python 3.9+**
-*   **Streamlit**: Interactive Dashboard.
-*   **Scikit-Learn**: Machine Learning models (RandomForest, IsolationForest).
-*   **Pandas & NumPy**: Data manipulation.
-*   **Faker**: Synthetic data generation.
-
-## 💻 Contribution Guide
-
-Follow these steps to set up the project locally for development.
-
-### 1. Prerequisites
-
-Ensure you have the following installed:
-*   [Python](https://www.python.org/downloads/) (Version 3.8 or higher)
-*   [Git](https://git-scm.com/)
-
-### 2. Clone the Repository
-
-(If you haven't already because this is part of a monorepo)
-
-```bash
-git clone https://github.com/YOUR_USERNAME/my-app-monorepo.git
-cd my-app-monorepo
-```
-
-### 3. Navigate to the App Directory
-
-```bash
-cd apps/smart-claims-processor
-```
-
-### 4. Create a Virtual Environment
-
-It is highly recommended to use a virtual environment to manage dependencies.
-
-**Windows:**
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate
-```
-
-**Mac/Linux:**
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-### 5. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 6. Run the Application
-
-Start the Streamlit dashboard:
-
-```bash
-streamlit run app.py
-```
-
-*   The app will automatically generate `insurance_claims.csv` (synthetic training data) on the first run.
-*   The dashboard will open in your default browser at `http://localhost:8501`.
-
-## 🧪 Testing
-
-To test the data generation logic independently:
-
-```bash
-python src/data_generator.py
-```
+This project contains the full-stack implementation of the **Smart Insurance Claim Processing & Fraud Guard** system.
 
 ## 📂 Project Structure
 
-```
-smart-claims-processor/
-├── src/
-│   ├── data_generator.py    # Generates synthetic insurance data
-├── app.py                   # Main Streamlit application & ML Logic
-├── requirements.txt         # Project dependencies
-└── README.md                # Documentation
-```
+*   **`backend/`**: Python-based AI Core & Streamlit Dashboard.
+    *   Contains the Multi-Modal AI Logic (NLP + Anomaly Detection).
+    *   Runs the interactive Streamlit dashboards (Admin & User).
+*   **`frontend/`**: React-based Web Interface.
+    *   (Under Development) A modern web portal for submitting claims.
+
+## 🚀 Getting Started
+
+### Backend (AI & Dashboard)
+
+1.  Navigate to `backend`:
+    ```bash
+    cd backend
+    ```
+2.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  Run the application:
+    ```bash
+    streamlit run app.py
+    ```
+
+### Frontend (React App)
+
+1.  Navigate to `frontend`:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the dev server:
+    ```bash
+    npm run dev
+    ```
+
+## 🤝 Workflow
+
+*   **Backend**: Handles Data Generation, Model Training, and Claim Analysis.
+*   **Frontend**: Provides a user-facing submission form (integrated via API in future steps).
