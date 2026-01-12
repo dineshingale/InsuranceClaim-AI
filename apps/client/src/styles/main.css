@@ -1,0 +1,302 @@
+/* Main App Styles - Soft UI Theme */
+
+/* ================= UTILITIES ================= */
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  height: 64px;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.025em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Optional: Add an icon to logo via CSS if needed, or component */
+
+.nav-links span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+}
+
+.nav-links span:hover {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+.nav-links .active {
+  color: var(--color-accent);
+  background-color: #EFF6FF;
+  /* Light blue bg */
+}
+
+/* ================= PAGE LAYOUT ================= */
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* ================= CARDS ================= */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+.subtitle {
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* ================= FORMS ================= */
+form label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Grid layout for inputs */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= BUTTONS ================= */
+button {
+  background: var(--color-text-primary);
+  /* Dark navy/black like Cloudkeep */
+  color: white;
+  border: none;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button style if needed */
+button.secondary {
+  background: white;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+/* ================= STATUS / ALERTS ================= */
+.notification {
+  background-color: #ECFDF5;
+  border-bottom: 1px solid #D1FAE5;
+  color: #065F46;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.success {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.details {
+  background: var(--color-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+}
+
+.details p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.75rem 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.details p:last-child {
+  border-bottom: none;
+}
+
+.details strong {
+  color: var(--color-text-primary);
+}
+
+.details span {
+  color: var(--color-text-secondary);
+}
+
+/* ================= PROGRESS STEPS ================= */
+.progress-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 3rem;
+  position: relative;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.progress-container::before {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-border);
+  z-index: 0;
+}
+
+.step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.step.active .circle {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px #EFF6FF;
+}
+
+.step.completed .circle {
+  border-color: var(--color-success);
+  background: var(--color-success);
+}
+
+.step span {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.step.active span {
+  color: var(--color-accent);
+}
