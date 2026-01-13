@@ -1,103 +1,134 @@
-# Factorial24 Hackathon Solution 🚀
+# 🏦 Smart Insurance Claims Processing System
 
-> **Target:** Campus Recruitment Process | 2026 Batch  
-> **Role:** QA Intern / Developer  
-> **Team:** 2 Students  
-> **Status:** 🚧 Preparing for Launch (Jan 12)
+> **A Multi-Modal AI System for Intelligent Claim Classification and Fraud Detection.**
 
-Welcome to our project repository for the **Factorial24 Hackathon**. This repository is designed to be a rapid-development monorepo template, ready to solve the problem statement released on the day of the event.
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/dineshingale/my-app-monorepo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
 
-## 📅 Event Schedule
+## 🧐 1. Problem Statement
 
-**Round:** Hackathon (24 Hours)  
-**Mode:** Hybrid (Online Kickoff -> Offline Evaluation)
+In the traditional insurance industry, claims processing is a bottleneck. It is manual, slow, and prone to human error. Authenticating claims requires cross-referencing policy details, analyzing incident descriptions, and flagging potential fraud—a process that can take weeks. 
 
-| Time | Session | Details | Venue |
-| :--- | :--- | :--- | :--- |
-| **Jan 12, 10:00 AM - 11:00 AM** | **Kickoff** | Welcome, Agenda, **Problem Statement Release**, Q&A | Online |
-| **Jan 12, 11:00 AM** | **Start** | Hackathon Begins (Coding Phase) | Online / Campus |
-| **Jan 13, 10:00 AM** | **End** | Code Freeze & Submission | At Campus |
-| **Jan 13, Onwards** | **Evaluation** | Solution Walkthrough, Design Explanation, Demo | At Campus |
+**Key Challenges:**
+*   **Slow Turnaround:** Customers wait days or weeks for approval.
+*   **Fraud Leakage:** Subtle patterns in fraudulent claims are often missed by human reviewers.
+*   **Operational Interaction:** High volume of manual checks for routine, low-value claims.
 
----
-
-## 🎯 Outcomes & Evaluation
-We are building a solution to demonstrate:
-*   **Clarity:** Clean code, clear documentation, and intuitive UI.
-*   **Innovation:** Creative approach to the problem statement.
-*   **Technical Depth:** Robust backend, efficient data handling, and type safety.
-*   **Feasibility:** A working, deployable prototype.
-*   **Collaboration:** Effective teamwork using Git & Monorepo practices.
+Our goal was to build a system that **automates the triage process**, instantly flagging fraud while fast-tracking authentic claims.
 
 ---
 
-## 🧩 Problem Statement
-*(To be updated on Jan 12 @ 10:00 AM)*
+## 💡 2. Solution Approach
 
-> **Awaiting Release...**  
-> We anticipate a challenge related to **Web Applications, Data Analysis, or Process Automation**, given Factorial24's expertise in these areas.
+We engineered a **Claims Intelligence Platform** that combines **Natural Language Processing (NLP)** with **Anomaly Detection**.
 
-**Our Approach:**
-1.  **Analyze**: Break down the problem into user stories (10:00 - 11:00 AM).
-2.  **Design**: Database schema and API contract (11:00 - 12:00 PM).
-3.  **Build**: execute using this boilerplate (12:00 PM onwards).
-4.  **Test**: Functional & UI testing (Jan 13 Morning).
+*   **Intelligent Triage:** We don't just "store" claims; we understand them. Using Random Forest classifiers on vectorized text, we categorize claims (Health, Accident, Theft) automatically.
+*   **Fraud Detection Engine:** We used an **Isolation Forest** algorithm to detect statistical anomalies in claim amount and customer tenure, flagging suspicious outliers.
+*   **Ranking System:** We introduced a "Rank Score" logic (`Authenticity * Priority`) to help claims officers focus on what matters most—high-value, authentic claims or critical fraud reviews.
 
 ---
 
-## 🛠️ Repository Structure (Monorepo)
-
-```bash
-my-app-monorepo/
-├── apps/
-│   ├── client/          # Frontend (React + Vite + TypeScript)
-│   └── server/          # Backend (FastAPI / Python)
-├── infra/               # Docker & Deployment Configs
-├── common/              # Shared Types/Schemas
-└── README.md            # You are here
-```
+## 🏗️ 3. System Architecture & Workflow
 
 ### Tech Stack
-*   **Frontend:** React, TailwindCSS, Lucide Icons.
-*   **Backend:** Python (FastAPI) or Node.js.
-*   **Database:** PostgreSQL / MongoDB.
-*   **Tools:** Docker, Git, Postman.
+*   **Frontend:** React (Vite) + Soft UI Design System (Custom CSS + Dark Mode)
+*   **Backend:** Python FastAPI (REST API)
+*   **ML Engine:** Scikit-Learn (Random Forest + Isolation Forest), Pandas, Joblib
+*   **Data Persistence:** CSV (File-based storage for prototype simplicity)
+
+### Application Workflow
+1.  **Submission:** User submits a claim via the React Client.
+2.  **Processing (The Brain):**
+    *   **NLP Pipeline:** Analyzes the `Description` to predict the category.
+    *   **Keyword Analysis:** Scans for urgency keywords (e.g., "emergency", "crash").
+    *   **Anomaly Detection:** `IsolationForest` scores the `Amount` vs. `Tenure` logic.
+3.  **Scoring Logic:**
+    *   **Authenticity (1-9):** Derived from the anomaly score (1 = Fraud, 9 = Authentic).
+    *   **Priority (1-9):** Calculated based on urgency, financial value, and customer loyalty.
+    *   **Rank:** Authenticity × Priority.
+4.  **Admin Dashboard:** Claims are sorted by Rank and filtered into "Manual Check", "Authentic", and "Fraud" tabs for efficient review.
 
 ---
 
-## ⚡ Quick Start for Contributors
+## 🚀 4. Getting Started (Demo)
 
-### 1. Prerequisities
-*   Docker & Docker Compose
-*   Node.js v18+
-*   Python 3.10+
+Follow these steps to run the full stack locally.
 
-### 2. Run the Stack
-We use **Docker Compose** to spin up the entire environment (DB + Apps).
+### Prerequisites
+*   Node.js (v18+)
+*   Python (v3.9+)
 
-```bash
-# Start Infrastructure (Database)
-docker-compose -f infra/docker-compose.yml up -d
+### Installation
 
-# Run Client (Terminal 1)
-cd apps/client
-npm install
-npm run dev
+1.  **Clone the Repository**
+    ```bash
+    git clone https://github.com/dineshingale/my-app-monorepo.git
+    cd my-app-monorepo
+    ```
 
-# Run Server (Terminal 2)
-cd apps/server
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+2.  **Start the Backend (Brain)**
+    ```bash
+    cd apps/server
+    pip install -r requirements.txt
+    
+    # Run the FastAPI server
+    python -m uvicorn main:app --reload --port 8000
+    ```
+
+3.  **Start the Frontend (Client)**
+    ```bash
+    # Open a new terminal
+    cd apps/client
+    npm install
+    npm run dev
+    ```
+
+4.  **Access the Application**
+    *   **User Portal:** `http://localhost:5173/` (Submit a claim)
+    *   **Admin Dashboard:** `http://localhost:5173/admin` (View analytics & train model)
+
+---
+
+## 🧠 5. Core Logic
+
+### Machine Learning Pipeline
+The heart of the system is in `apps/server/main.py`.
+
+```python
+# 1. NLP Pipeline
+nlp_pipeline = Pipeline([
+    ('vectorizer', CountVectorizer(stop_words='english')),
+    ('classifier', RandomForestClassifier(n_estimators=100))
+])
+
+# 2. Anomaly Detection (Fraud)
+iso_forest = IsolationForest(contamination=0.1)
+iso_forest.fit(df[['Amount', 'Customer_Tenure']])
 ```
 
+### The Ranking Algorithm
+To assist human decision-making, we synthesize raw ML scores into business metrics.
+
+$$ \text{Rank} = \text{Authenticity Score} \times \text{Priority Score} $$
+
+*   **Authenticity:** Sigmoid mapping of the Isolation Forest decision function.
+*   **Priority:** Weighted sum of Urgency (+2), High Value (+2), and VIP Tenure (+2).
+
 ---
 
-## 📝 Rules
-*   **No Live Backlogs:** Ensure eligibility criteria is met.
-*   **Attendance:** Mandatory for Online Kickoff and Offline Evaluation.
-*   **Submission:** Code must be pushed to this repository before the deadline.
+## 🔮 6. Future Improvements
+
+*   **Models:** Upgrade to Transformer-based models (BERT) for deeper semantic understanding of claim descriptions.
+*   **Infrastructure:** Migrate CSV storage to a proper database (PostgreSQL) and containerize with Docker (Issue #13).
+*   **Security:** Implement JWT Authentication for specific Admin routes.
+*   **Integration:** Add email notifications (SendGrid/Novu) when a claim is flagged as "High Priority".
 
 ---
-*Built with ❤️ for Factorial24 Recruitment Drive*
+
+### 🤝 Collaboration
+This project is developed using a structured **Git Workflow**:
+`Issue` -> `Branch` -> `Implementation` -> `Pull Request` -> `Merge`.
+
+See ours [Development Workflow](./development/standard_workflow.md) for details.
