@@ -32,6 +32,8 @@ We engineered a **Claims Intelligence Platform** that combines **Natural Languag
 
 ## 🏗️ 3. System Architecture & Workflow
 
+![System Architecture](./assets/architecture-diagram.jpeg)
+
 ### Tech Stack
 *   **Frontend:** React (Vite) + Soft UI Design System (Custom CSS + Dark Mode)
 *   **Backend:** Python FastAPI (REST API)
