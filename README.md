@@ -132,5 +132,3 @@ $$ \text{Rank} = \text{Authenticity Score} \times \text{Priority Score} $$
 ### 🤝 Collaboration
 This project is developed using a structured **Git Workflow**:
 `Issue` -> `Branch` -> `Implementation` -> `Pull Request` -> `Merge`.
-
-See ours [Development Workflow](./development/standard_workflow.md) for details.
