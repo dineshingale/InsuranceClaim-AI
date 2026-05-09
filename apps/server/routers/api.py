@@ -61,8 +61,8 @@ async def train_model(file: UploadFile = File(...)):
     
     try:
         df = pd.read_csv(data)
-        nlp, fraud, meta = train_system_logic(df)
-        save_model(nlp, fraud, meta)
+        nlp, fraud, meta, le = train_system_logic(df)
+        save_model(nlp, fraud, meta, le)
         return {"message": "Training successful", "meta": meta}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
