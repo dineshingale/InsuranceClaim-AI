@@ -8,8 +8,8 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.preprocessing import LabelEncoder
 from xgboost import XGBClassifier
 from datetime import datetime
-from core.config import MODEL_PATH
-from core.utils import sigmoid_scale, calculate_priority
+from src.config import MODEL_PATH
+from src.utils import sigmoid_scale, calculate_priority
 
 def load_model():
     if os.path.exists(MODEL_PATH):
