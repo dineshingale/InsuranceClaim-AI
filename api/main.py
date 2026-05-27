@@ -5,7 +5,7 @@ import pandas as pd
 
 app = FastAPI()
 
-# Load models
+# load models
 XGB_MODEL = joblib.load("models/fraud_xgb.pkl")
 ISO_FOREST = joblib.load("models/anomaly_iso.pkl")
 
@@ -17,7 +17,7 @@ class ClaimInput(BaseModel):
 
 @app.post("/predict")
 def predict_claim(data: ClaimInput):
-    # Prepare input for model
+    # prepare input for model
     input_dict = {
         'amount': data.amount,
         'tenure': data.tenure,

@@ -1,36 +1,27 @@
-import pandas as pd
-from src.engineering import DataProcessor
+import wandb
+from sklearn.model_selection import train_test_split
 from src.pipeline import InsuranceModelPipeline
 
-def train_model_logic(csv_path="data/insurance_claims.csv"):
-    """
-    Core logic to clean data and train the models.
-    """
-    print(f"--- Loading data from {csv_path} ---")
-    processor = DataProcessor()
+def train_model_logic(X, y): # Added arguments here
+    # Split data with stratification
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
-    # 1. Load local CSV
-    raw_df = pd.read_csv(csv_path)
+    print(f"Class distribution: {y.value_counts().to_dict()} (0=legitimate, 1=fraud)")
 
-    # 2. Clean & Engineer Features
-    # Note: Ensure your engineering.py has the clean_data and encode_target methods
-    df = processor.clean_data(raw_df)
-    df = processor.encode_target(df)
-
-    # Inside your train_model_logic in src/train.py:
-    feature_cols = ['amount', 'tenure', 'witness_count', 'hour', 'is_night_incident', 'suspicious_evidence']
-    X = df[feature_cols]
-    y = df['target']
-
-
-    # 4. Initialize and Train Pipeline
-    print("--- Training XGBoost & Isolation Forest ---")
+    # Initialize and train pipeline
     pipeline_manager = InsuranceModelPipeline()
-    
     pipeline_manager.build_supervised_pipeline()
-    pipeline_manager.train_fraud_model(X, y)
-    pipeline_manager.train_anomaly_model(X)
+    
+    fraud_model = pipeline_manager.train_fraud_model(X_train, y_train)
+    anomaly_model = pipeline_manager.train_anomaly_model(X_train)
+    
+    # Log metrics
+    fraud_score = fraud_model.score(X_test, y_test)
+    # Note: If anomaly_model is an IsolationForest, .score() returns negative outlier scores, 
+    # not accuracy. Ensure your pipeline handles this.
+    anomaly_scores = anomaly_model.score_samples(X_test) 
+    avg_anomaly_score = anomaly_scores.mean()
+    
+    wandb.log({"fraud_test_accuracy": fraud_score, "anomaly_test_accuracy": avg_anomaly_score})
 
-    # 5. Save the models to the models/ folder
-    pipeline_manager.save_models("models/")
-    print("--- Training Complete. Models saved in models/ folder ---")
+    return pipeline_manager, fraud_model, anomaly_model

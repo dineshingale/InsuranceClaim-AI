@@ -1,21 +1,32 @@
-# run_train.py
-import os
+import pandas as pd
+import wandb
 from src.train import train_model_logic
+from src.engineering import DataProcessor
 
 def main():
-    # Path to your local dataset
-    DATA_PATH = "data/insurance_claims.csv"
-    
-    if not os.path.exists(DATA_PATH):
-        print(f"Error: Dataset not found at {DATA_PATH}. Please place your CSV there.")
-        return
+    # Initialize wandb run
+    run = wandb.init(project="insuranceClaim-ai", job_type="train")
 
-    # Trigger the training
-    try:
-        train_model_logic(DATA_PATH)
-        print("\nSuccessfully trained models! You can now start the API.")
-    except Exception as e:
-        print(f"\nTraining failed with error: {e}")
+    # Load and process data
+    raw_df = pd.read_csv("data/insurance_claims.csv")
+    processor = DataProcessor()
+    
+    df = processor.clean_data(raw_df)
+    df = processor.encode_target(df)
+
+    # Feature selection
+    feature_cols = ['amount', 'tenure', 'witness_count', 'hour', 'is_night_incident', 'suspicious_evidence']
+    X = df[feature_cols]
+    y = df['target']
+    
+    # Call the logic from train.py
+    pipeline_manager, fraud_model, anomaly_model = train_model_logic(X, y)
+
+    # Save models
+    pipeline_manager.save_models("models/")
+    
+    wandb.finish()
+    print("Training Complete. Models saved to models/")
 
 if __name__ == "__main__":
     main()
