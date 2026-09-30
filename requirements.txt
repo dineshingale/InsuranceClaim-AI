@@ -5,8 +5,7 @@ numpy
 scikit-learn
 xgboost
 google-cloud-bigquery
+db-dtypes
 google-auth
 joblib
-wandb
-python-multipart
-jobpy
+wandb

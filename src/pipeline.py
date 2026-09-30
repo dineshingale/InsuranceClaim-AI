@@ -4,7 +4,7 @@ from xgboost import XGBClassifier
 from sklearn.ensemble import IsolationForest
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import GridSearchCV
 
 class InsuranceModelPipeline:
     def __init__(self):
@@ -57,6 +57,3 @@ class InsuranceModelPipeline:
         joblib.dump(self.iso_forest, f"{path_prefix}anomaly_iso.pkl")
         print("Models exported to /models folder.")
 
-# integration Note: 
-# input X here will be from engineering.py 
-# containing [amount, tenure, desc_length, claim_density, contains_red_flags]

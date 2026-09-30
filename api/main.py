@@ -9,6 +9,10 @@ app = FastAPI()
 XGB_MODEL = joblib.load("models/fraud_xgb.pkl")
 ISO_FOREST = joblib.load("models/anomaly_iso.pkl")
 
+@app.get("/api/health")
+def health_check():
+    return {"status": "healthy"}
+
 class ClaimInput(BaseModel):
     amount: float
     tenure: int
