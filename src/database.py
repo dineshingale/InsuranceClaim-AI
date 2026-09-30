@@ -25,16 +25,9 @@ class BigQueryHandler:
             return None
 
     def load_training_data(self, table_id):
-        """
-        Load all data from BigQuery table
-        Args:
-            table_id: full table ID (project.dataset.table)
-        Returns:
-            pandas DataFrame
-        """
         query = f"SELECT * FROM `{table_id}`"
         print(f"Loading data from: {table_id}")
         df = self.execute_query(query)
         if df is not None:
-            print(f"✓ Loaded {len(df)} rows")
-        return df
+            print(f"Loaded {len(df)} rows")
+        return df
